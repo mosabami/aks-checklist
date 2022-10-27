@@ -3,6 +3,8 @@ import uuid
 import os
 import pandas as pd
 import json
+
+need_to_compare = True
 # get the mapping table that converts filename to the correct category name in FTA's checklist
 filename_map = pd.read_csv('filename_map.csv')
 filename_map.to_dict("list")
@@ -80,6 +82,8 @@ for file in filenames:
         # transform each item in the file to the FT data format
         for item in content:
             transformed_item = transform(item,file2)
+            if need_to_compare:
+                transformed_item["source"] = 'the-aks-checklist' # temporary step to help us identify missing items from the-aks-checklist
             items.append(transformed_item)
         print(f"finished {file2}")    
     else:

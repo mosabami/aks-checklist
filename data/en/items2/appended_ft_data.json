@@ -123,12 +123,72 @@
     {
       "category": "Identity and Access Management",
       "subcategory": "Identity",
-      "text": "Use Pod identity for workload identities (addon v2 in preview today)",
+      "text": "For POD Identity Access Management use Azure AD Workload Identity (preview)",
       "guid": "d2e0d5d7-71d4-41e3-910c-c57b4a4b1410",
       "security": 1,
       "simple": -1,
       "severity": "Medium",
-      "link": "https://docs.microsoft.com/azure/aks/operator-best-practices-identity"
+      "link": "https://learn.microsoft.com/azure/aks/workload-identity-migration-sidecar"
+    },
+    {
+      "category": "Identity and Access Management",
+      "subcategory": "Identity",
+      "text": "For AKS non-interactive logins use kubelogin (preview)",
+      "guid": "d2e0d5d7-71d4-41e3-910c-c57b4a4b1410",
+      "security": 1,
+      "simple": -1,
+      "severity": "Medium",
+      "link": "https://learn.microsoft.com/azure/aks/managed-aad#non-interactive-sign-in-with-kubelogin"
+    },
+    {
+      "category": "Identity and Access Management",
+      "subcategory": "Identity",
+      "text": "Disable AKS local accounts",
+      "guid": "d2e0d5d7-71d4-41e3-910c-c57b4a4b1410",
+      "security": 1,
+      "simple": -1,
+      "severity": "Medium",
+      "link": "https://learn.microsoft.com/azure/aks/managed-aad#disable-local-accounts"
+    },
+    {
+      "category": "Identity and Access Management",
+      "subcategory": "Identity",
+      "text": "Configure if required Just-in-time cluster access",
+      "guid": "d2e0d5d7-71d4-41e3-910c-c57b4a4b1410",
+      "security": 1,
+      "simple": -1,
+      "severity": "Low",
+      "link": "https://learn.microsoft.com/azure/aks/managed-aad#configure-just-in-time-cluster-access-with-azure-ad-and-aks"
+    },
+    {
+      "category": "Identity and Access Management",
+      "subcategory": "Identity",
+      "text": "Configure if required AAD conditional access for AKS",
+      "guid": "d2e0d5d7-71d4-41e3-910c-c57b4a4b1410",
+      "security": 1,
+      "simple": -1,
+      "severity": "Low",
+      "link": "https://learn.microsoft.com/azure/aks/managed-aad#use-conditional-access-with-azure-ad-and-aks"
+    },
+    {
+      "category": "Identity and Access Management",
+      "subcategory": "Identity",
+      "text": "If required for Windows AKS workloads configure gMSA ",
+      "guid": "d2e0d5d7-71d4-41e3-910c-c57b4a4b1410",
+      "security": 1,
+      "simple": -1,
+      "severity": "Low",
+      "link": "https://learn.microsoft.com/azure/aks/use-group-managed-service-accounts"
+    },
+    {
+      "category": "Identity and Access Management",
+      "subcategory": "Identity",
+      "text": "For finer control consider using a managed Kubelet Identity",
+      "guid": "d2e0d5d7-71d4-41e3-910c-c57b4a4b1410",
+      "security": 1,
+      "simple": -1,
+      "severity": "Medium",
+      "link": "https://learn.microsoft.com/azure/aks/use-managed-identity#use-a-pre-created-kubelet-managed-identity"
     },
     {
       "category": "Network Topology and Connectivity",
@@ -213,6 +273,26 @@
     },
     {
       "category": "Network Topology and Connectivity",
+      "subcategory": "Scalability",
+      "text": "Use Azue NAT Gateway as outboundType for scaling egress traffic",
+      "guid": "b3808b9f-a1cf-4204-ad01-3a923ce474db",
+      "scale": 1,
+      "simple": -1,
+      "severity": "Low",
+      "link": "https://learn.microsoft.com/azure/aks/nat-gateway"
+    },
+    {
+      "category": "Network Topology and Connectivity",
+      "subcategory": "Scalability",
+      "text": "Use Dynamic allocations of IPs in order to avoid Azure CNI IP exhaustion",
+      "guid": "b3808b9f-a1cf-4204-ad01-3a923ce474db",
+      "scale": 1,
+      "simple": -1,
+      "severity": "Medium",
+      "link": "https://learn.microsoft.com/azure/aks/configure-azure-cni#dynamic-allocation-of-ips-and-enhanced-subnet-support"
+    },
+    {
+      "category": "Network Topology and Connectivity",
       "subcategory": "Best practices",
       "text": "If using AGIC, do not share an AppGW across clusters",
       "guid": "cbd8ac2a-aebc-4a2a-94da-1dbf3dc99248",
@@ -241,6 +321,17 @@
       "severity": "High",
       "graph": "where type=='microsoft.containerservice/managedclusters' | where isnotnull(properties.apiServerAccessProfile.enablePrivateCluster) | extend compliant = (properties.apiServerAccessProfile.enablePrivateCluster==true) | distinct id, compliant",
       "link": "https://docs.microsoft.com/azure/aks/private-clusters"
+    },
+    {
+      "category": "Network Topology and Connectivity",
+      "subcategory": "Security",
+      "text": "For Windows 2019 and 2022 AKS nodes Calico Network Policies can be used ",
+      "guid": "ecccd979-3b6b-4cda-9b50-eb2eb03dda6d",
+      "security": 1,
+      "simple": -1,
+      "severity": "Medium",
+      "graph": "where type=='microsoft.containerservice/managedclusters' | where isnotnull(properties.apiServerAccessProfile.enablePrivateCluster) | extend compliant = (properties.apiServerAccessProfile.enablePrivateCluster==true) | distinct id, compliant",
+      "link": "https://learn.microsoft.com/azure/aks/use-network-policies"
     },
     {
       "category": "Network Topology and Connectivity",
@@ -286,6 +377,17 @@
     },
     {
       "category": "Network Topology and Connectivity",
+      "subcategory": "Security",
+      "text": "If required add company HTTP Proxy",
+      "guid": "9bda4776-8f24-4c11-9775-c2ea55b46a94",
+      "security": 2,
+      "cost": -2,
+      "severity": "Low",
+      "graph": "Resources | where type=~'microsoft.containerservice/managedclusters' | project resourceGroup,name,pools=properties.agentPoolProfiles | mv-expand pools | project subnetId=tostring(pools.vnetSubnetID) | where isnotempty(subnetId) | join (Resources | where type=='microsoft.network/virtualnetworks' | project id,resourceGroup,name,enableDdosProtection=tostring(properties.enableDdosProtection),subnets=properties.subnets | mv-expand subnets | project id,resourceGroup,name,enableDdosProtection,subnetId=tostring(subnets.id)) on subnetId | distinct id,resourceGroup,name,enableDdosProtection | extend compliant = (enableDdosProtection == 'true')",
+      "link": "https://learn.microsoft.com/azure/aks/http-proxy"
+    },
+    {
+      "category": "Network Topology and Connectivity",
       "subcategory": "Best practices",
       "text": "Do not use AKS Application Routing Add-On",
       "guid": "8008ae7d-7e4b-4475-a6c8-bdbf59bce65d",
@@ -294,6 +396,17 @@
       "severity": "High",
       "graph": "where type=='microsoft.containerservice/managedclusters' | extend compliant = (isnull(properties.addonProfiles.httpApplicationRouting) or properties.addonProfiles.httpApplicationRouting.enabled==false) | distinct id,compliant",
       "link": "https://docs.microsoft.com/azure/aks/http-application-routing"
+    },
+    {
+      "category": "Network Topology and Connectivity",
+      "subcategory": "Best practices",
+      "text": "For Windows workloads use Accelerated Networking",
+      "guid": "8008ae7d-7e4b-4475-a6c8-bdbf59bce65d",
+      "scale": 1,
+      "simple": -1,
+      "severity": "Medium",
+      "graph": "where type=='microsoft.containerservice/managedclusters' | extend compliant = (isnull(properties.addonProfiles.httpApplicationRouting) or properties.addonProfiles.httpApplicationRouting.enabled==false) | distinct id,compliant",
+      "link": "https://learn.microsoft.com/azure/virtual-network/accelerated-networking-overview"
     },
     {
       "category": "Network Topology and Connectivity",
@@ -324,6 +437,36 @@
       "simple": -2,
       "severity": "Medium",
       "link": "https://docs.microsoft.com/azure/aks/servicemesh-about"
+    },
+    {
+      "category": "Network Topology and Connectivity",
+      "subcategory": "Operations",
+      "text": "If required add your own CNI plugin",
+      "guid": "e9855d04-c3c3-49c9-a6bb-2c12159a114b",
+      "security": 1,
+      "simple": -2,
+      "severity": "Low",
+      "link": "https://learn.microsoft.com/azure/aks/use-byo-cni"
+    },
+    {
+      "category": "Network Topology and Connectivity",
+      "subcategory": "Operations",
+      "text": "If required configure Public IP per node in AKS",
+      "guid": "e9855d04-c3c3-49c9-a6bb-2c12159a114b",
+      "security": 1,
+      "simple": -2,
+      "severity": "Low",
+      "link": "https://learn.microsoft.com/azure/aks/use-multiple-node-pools#assign-a-public-ip-per-node-for-your-node-pools"
+    },
+    {
+      "category": "Network Topology and Connectivity",
+      "subcategory": "Best practices",
+      "text": "If using Azure CNI, consider using different Subnets for NodePools",
+      "guid": "e9855d04-c3c3-49c9-a6bb-2c12159a114b",
+      "security": 1,
+      "simple": -2,
+      "severity": "Medium",
+      "link": "https://learn.microsoft.com/azure/aks/use-multiple-node-pools#add-a-node-pool-with-a-unique-subnet"
     },
     {
       "category": "Governance and Security",
@@ -410,6 +553,46 @@
     {
       "category": "Governance and Security",
       "subcategory": "Compliance",
+      "text": "If required configure FIPS",
+      "guid": "cc639637-a652-42ac-89e8-06965388e9de",
+      "security": 1,
+      "cost": -1,
+      "severity": "Low",
+      "link": "https://learn.microsoft.com/azure/aks/use-multiple-node-pools#add-a-fips-enabled-node-pool"
+    },
+    {
+      "category": "Governance and Security",
+      "subcategory": "Secrets",
+      "text": "If required add Key Management Service etcd encryption",
+      "guid": "cc639637-a652-42ac-89e8-06965388e9de",
+      "security": 1,
+      "cost": -1,
+      "severity": "Medium",
+      "link": "https://learn.microsoft.com/azure/aks/use-kms-etcd-encryption"
+    },
+    {
+      "category": "Governance and Security",
+      "subcategory": "Secrets",
+      "text": "If required consider using Confidential Compute for AKS",
+      "guid": "cc639637-a652-42ac-89e8-06965388e9de",
+      "security": 1,
+      "cost": -1,
+      "severity": "Low",
+      "link": "https://learn.microsoft.com/azure/confidential-computing/confidential-nodes-aks-overview"
+    },
+    {
+      "category": "Governance and Security",
+      "subcategory": "Secrets",
+      "text": "Consider using Defender for Containers",
+      "guid": "cc639637-a652-42ac-89e8-06965388e9de",
+      "security": 1,
+      "cost": -1,
+      "severity": "Medium",
+      "link": "https://learn.microsoft.com/azure/defender-for-cloud/defender-for-containers-enable"
+    },
+    {
+      "category": "Governance and Security",
+      "subcategory": "Compliance",
       "text": "Define app separation requirements (namespace/nodepool/cluster)",
       "guid": "d167dd18-2b0a-4c24-8b99-9a646f8389a7",
       "security": 1,
@@ -424,6 +607,42 @@
       "cost": 1,
       "severity": "Low",
       "link": "https://docs.microsoft.com/azure/cloud-adoption-framework/scenarios/aks/eslz-cost-governance-with-kubecost"
+    },
+    {
+      "category": "Cost Governance",
+      "subcategory": "Cost",
+      "text": "If required scale NodePool snapshots",
+      "guid": "f82cb8eb-8c0a-4a63-a25a-4956eaa8dc4a",
+      "cost": 1,
+      "severity": "Low",
+      "link": "https://learn.microsoft.com/azure/aks/node-pool-snapshot"
+    },
+    {
+      "category": "Cost Governance",
+      "subcategory": "Cost",
+      "text": "Use scale down mode to delete/delallocate nodes",
+      "guid": "f82cb8eb-8c0a-4a63-a25a-4956eaa8dc4a",
+      "cost": 1,
+      "severity": "Low",
+      "link": "https://learn.microsoft.com/azure/aks/scale-down-mode"
+    },
+    {
+      "category": "Cost Governance",
+      "subcategory": "Cost",
+      "text": "When required use multi-instance partioning GPU on AKS Clusters",
+      "guid": "f82cb8eb-8c0a-4a63-a25a-4956eaa8dc4a",
+      "cost": 1,
+      "severity": "Medium",
+      "link": "https://learn.microsoft.com/azure/aks/gpu-multi-instance"
+    },
+    {
+      "category": "Cost Governance",
+      "subcategory": "Cost",
+      "text": "If running a Dev/Test cluster use NodePool Start/Stop",
+      "guid": "f82cb8eb-8c0a-4a63-a25a-4956eaa8dc4a",
+      "cost": 1,
+      "severity": "Low",
+      "link": "https://learn.microsoft.com/azure/aks/start-stop-nodepools"
     },
     {
       "category": "Operations",
@@ -445,6 +664,16 @@
       "scale": 1,
       "severity": "High",
       "link": "https://docs.microsoft.com/azure/virtual-machines/disks-types"
+    },
+    {
+      "category": "Operations",
+      "subcategory": "Storage",
+      "text": "For hyper performance storage option use Ultra Disks on AKS",
+      "guid": "fc4972cc-3cd2-45bf-a707-6e9eab4bed32",
+      "cost": -1,
+      "scale": 1,
+      "severity": "Low",
+      "link": "https://learn.microsoft.com/azure/aks/use-ultra-disks"
     },
     {
       "category": "Operations",
@@ -494,6 +723,15 @@
       "simple": 1,
       "severity": "Low",
       "link": "https://docs.microsoft.com/azure/aks/operator-best-practices-scheduler"
+    },
+    {
+      "category": "Operations",
+      "subcategory": "Compliance",
+      "text": "Enable AKS auto-certificate rotation",
+      "guid": "5388e9de-d167-4dd1-a2b0-ac241b999a64",
+      "simple": 1,
+      "severity": "Low",
+      "link": "https://learn.microsoft.com/azure/aks/certificate-rotation"
     },
     {
       "category": "Operations",
@@ -565,6 +803,14 @@
     },
     {
       "category": "Operations",
+      "subcategory": "Compliance",
+      "text": "Consider using AKS command invoke on private clusters",
+      "guid": "0102ce16-ee30-41e6-b882-e52e4621dd68",
+      "severity": "Low",
+      "link": "https://learn.microsoft.com/azure/aks/command-invoke"
+    },
+    {
+      "category": "Operations",
       "subcategory": "Cost",
       "text": "Consider spot node pools for non time-sensitive workloads",
       "guid": "c5a5b252-1e44-4a59-a9d2-399c4d7b68d0",
@@ -583,6 +829,15 @@
       "severity": "Low",
       "graph": "where type=='microsoft.containerservice/managedclusters' | extend compliant = (isnotnull(properties.addonProfiles.aciConnectorLinux) and properties.addonProfiles.aciConnectorLinux.enabled==true) | distinct id,compliant",
       "link": "https://docs.microsoft.com/azure/aks/concepts-scale"
+    },
+    {
+      "category": "Operations",
+      "subcategory": "Compliance",
+      "text": "For planned events consider using Node Auto Drain",
+      "guid": "31d7aaab-7571-4449-ab80-53d89e89d17b",
+      "security": 1,
+      "severity": "Low",
+      "link": "https://learn.microsoft.com/azure/aks/node-auto-repair#node-autodrain"
     },
     {
       "category": "Operations",
@@ -706,6 +961,17 @@
     {
       "category": "Operations",
       "subcategory": "Scalability",
+      "text": "Customize node configuration for AKS node pools",
+      "guid": "90ce65de-8e13-4f9c-abd4-69266abca264",
+      "cost": -1,
+      "ha": 1,
+      "severity": "Low",
+      "graph": "where type=='microsoft.containerservice/managedclusters' | extend compliant = (isnotnull(properties.austoscalerProfile)) | distinct id,compliant",
+      "link": "https://learn.microsoft.com/azure/aks/custom-node-configuration"
+    },
+    {
+      "category": "Operations",
+      "subcategory": "Scalability",
       "text": "Use the Horizontal Pod Autoscaler when required",
       "guid": "faa19bfe-9d55-4d04-a3c4-919ca1b2d121",
       "scale": 1,
@@ -722,6 +988,46 @@
       "cost": 1,
       "severity": "High",
       "link": "https://blog.cloudtrooper.net/2020/10/23/which-vm-size-should-i-choose-as-aks-node/"
+    },
+    {
+      "category": "Operations",
+      "subcategory": "Scalability",
+      "text": "If required for scalability consider adding more than 5000 nodes",
+      "description": "Larger nodes will bring higher performance and features such as ephemeral disks and accelerated networking, but they will increase the blast radius and decrease the scaling granularity",
+      "guid": "5ae124ba-34df-4585-bcdc-e9bd3bb0cdb3",
+      "cost": 1,
+      "severity": "Low",
+      "link": "https://learn.microsoft.com/azure/aks/quotas-skus-regions#service-quotas-and-limits"
+    },
+    {
+      "category": "Operations",
+      "subcategory": "Scalability",
+      "text": "Consider subscribing to EventGrid Events for AKS automation",
+      "description": "Larger nodes will bring higher performance and features such as ephemeral disks and accelerated networking, but they will increase the blast radius and decrease the scaling granularity",
+      "guid": "5ae124ba-34df-4585-bcdc-e9bd3bb0cdb3",
+      "cost": 1,
+      "severity": "Low",
+      "link": "https://learn.microsoft.com/azure/event-grid/event-schema-aks"
+    },
+    {
+      "category": "Operations",
+      "subcategory": "Scalability",
+      "text": "For long running operation on an AKS cluster consider event termination",
+      "description": "Larger nodes will bring higher performance and features such as ephemeral disks and accelerated networking, but they will increase the blast radius and decrease the scaling granularity",
+      "guid": "5ae124ba-34df-4585-bcdc-e9bd3bb0cdb3",
+      "cost": 1,
+      "severity": "Low",
+      "link": "https://learn.microsoft.com/azure/aks/manage-abort-operations"
+    },
+    {
+      "category": "Operations",
+      "subcategory": "Scalability",
+      "text": "If required consider using Azure Dedicated Hosts for AKS nodes",
+      "description": "Larger nodes will bring higher performance and features such as ephemeral disks and accelerated networking, but they will increase the blast radius and decrease the scaling granularity",
+      "guid": "5ae124ba-34df-4585-bcdc-e9bd3bb0cdb3",
+      "cost": 1,
+      "severity": "Low",
+      "link": "https://learn.microsoft.com/azure/aks/use-azure-dedicated-hosts"
     },
     {
       "category": "Operations",
@@ -774,6 +1080,15 @@
     {
       "category": "Application Deployment",
       "subcategory": "Development",
+      "text": "If requrired for AKS Windows workloads HostProcess containers can be used",
+      "guid": "785c2fa5-5b56-4ad4-a408-fe72734c476b",
+      "cost": 1,
+      "severity": "Low",
+      "link": "https://learn.microsoft.com/azure/aks/use-windows-hpc"
+    },
+    {
+      "category": "Application Deployment",
+      "subcategory": "Development",
       "text": "Use KEDA if running event-driven workloads",
       "guid": "a280dcf5-90ce-465d-b8e1-3f9ccbd46926",
       "scale": 1,
@@ -795,7 +1110,7 @@
       "description": "Scan your container images to ensure there are no vulnerabilities in it",
       "subcategory": "security",
       "category": "Governance and Security",
-      "guid": "95afbad0-f085-49d6-a82b-5fe798691318",
+      "guid": "eeae2f69-a910-40ee-968d-9dc84a81bee5",
       "severity": "High",
       "link": "https://docs.microsoft.com/en-us/azure/security-center/azure-container-registry-integration"
     },
@@ -804,7 +1119,7 @@
       "description": "One of the most common custom policies that you might want to consider is to restrict the images that can be deployed in your cluster. But it can also be addressed with a proper egress lockdown or using an admission controller",
       "subcategory": "security",
       "category": "Governance and Security",
-      "guid": "97e9ec02-01bc-42a0-8d91-133fdf0791ab",
+      "guid": "956b3066-cacd-4f4a-ac65-bcb6f3849d06",
       "severity": "Medium",
       "link": "https://docs.microsoft.com/en-us/azure/governance/policy/concepts/rego-for-aks#built-in-policies"
     },
@@ -813,7 +1128,7 @@
       "description": "Integrate Runtime Security for your pods.  To complete the defense in depth structure, ensure Runtime protection is in place to protect from process, network, storage and system call attacks.",
       "subcategory": "security",
       "category": "Governance and Security",
-      "guid": "d4d39e95-b7d3-43e1-b37f-09e180e00583",
+      "guid": "c4ecd644-5eac-4486-b9d7-265610dab743",
       "severity": "High",
       "link": "https://docs.paloaltonetworks.com/prisma/prisma-cloud/prisma-cloud-admin-compute/runtime_defense.html"
     },
@@ -822,7 +1137,7 @@
       "description": "Use policy to protect images from drift while in the registry, on both push and pull.",
       "subcategory": "security",
       "category": "Governance and Security",
-      "guid": "75372e8b-b3aa-46d0-9ded-3c41099c5403",
+      "guid": "6a282691-c546-4adc-a457-befc23f8438f",
       "severity": "High",
       "link": "https://github.com/Azure/acr/tree/master/docs/preview/quarantine"
     },
@@ -831,7 +1146,7 @@
       "description": "The Azure Container Registry service supports a set of built-in Azure roles that provide different levels of permissions to an Azure container registry. Use Azure role-based access control (RBAC) to assign specific permissions to users, service principals, or other identities that need to interact with a registry.",
       "subcategory": "security",
       "category": "Governance and Security",
-      "guid": "05d04800-1b93-4d34-beca-2e91a3127643",
+      "guid": "33f3b8f9-1284-4a87-8303-69ddb811d809",
       "severity": "High",
       "link": "https://docs.microsoft.com/en-us/azure/container-registry/container-registry-roles"
     },
@@ -840,7 +1155,7 @@
       "description": "Limit access to a registry by assigning virtual network private IP addresses to the registry endpoints and using Azure Private Link. Network traffic between the clients on the virtual network and the registry's private endpoints traverses the virtual network and a private link on the Microsoft backbone network, eliminating exposure from the public internet. Private Link also enables enables private registry access from on-premises through Azure ExpressRoute private peering or a VPN gateway.",
       "subcategory": "network",
       "category": "Governance and Security",
-      "guid": "016ec725-75ef-4daa-8715-6af6768f3ad2",
+      "guid": "62a0a21a-f80f-4afe-b552-fe810eb36619",
       "severity": "High",
       "link": "https://docs.microsoft.com/en-us/azure/container-registry/container-registry-private-link"
     },
@@ -849,7 +1164,7 @@
       "description": "When building a docker image, try to use the distroless version of the base OS image, to reduce the risk of vulnerabilities with preinstalled but unused tools. From example, use base-debian10 instead of debian10",
       "subcategory": "security",
       "category": "Governance and Security",
-      "guid": "579e48a6-552c-45ee-9840-8bf51664eeea",
+      "guid": "ff583eff-7dae-41f5-ae06-ca679a86614a",
       "severity": "Medium",
       "link": "https://github.com/GoogleContainerTools/distroless"
     },
@@ -858,7 +1173,7 @@
       "description": "The API server is the central way to interact with your cluster. To improve cluster security and minimize attacks, the API server should only be accessible from a limited set of IP address ranges.By using a private cluster, you can ensure that network traffic between your API server and your node pools remains on the private network only. Because the API server has a private address, it means that to access it for administration or for deployment, you need to set up a private connection, like using a 'jumpbox' (i.e.: Azure Bastion)",
       "subcategory": "security",
       "category": "Governance and Security",
-      "guid": "6c42c65c-9a8c-44fe-a44b-b58d6af6fb4a",
+      "guid": "05361bf8-0804-44a0-b427-a9d1997b143d",
       "severity": "High",
       "link": "https://docs.microsoft.com/en-us/azure/aks/api-server-authorized-ip-ranges"
     },
@@ -867,7 +1182,7 @@
       "description": "Manage system node pools in Azure Kubernetes Service (AKS)",
       "subcategory": "security",
       "category": "Governance and Security",
-      "guid": "84c6bc9a-ce76-4a7b-b790-c8484c34d578",
+      "guid": "18e5df59-a39a-4c23-9c32-d54b059ee75a",
       "severity": "Medium",
       "link": "https://docs.microsoft.com/en-us/azure/aks/use-system-pools"
     },
@@ -876,7 +1191,7 @@
       "description": "Some industries require certified kubernetes or to implement specific configurations. AKS offers several features to meet this requirements",
       "subcategory": "security",
       "category": "Governance and Security",
-      "guid": "9ce8a2d4-36a2-4d1a-9b33-7454c9bebb7a",
+      "guid": "a9038f0c-6c66-49ca-9023-e2aa9b299b03",
       "severity": "Medium",
       "link": "https://docs.microsoft.com/en-us/azure/aks/use-multiple-node-pools#add-a-fips-enabled-node-pool-preview"
     },
@@ -885,7 +1200,7 @@
       "description": "In a private cluster, the control plane or API server has internal IP addresses and is not exposed to Internet",
       "subcategory": "security",
       "category": "Governance and Security",
-      "guid": "fad2a4ab-89d3-462c-97de-c2ec80438d6e",
+      "guid": "41517edb-62ad-4fa8-8d25-07daf8573a0d",
       "severity": "High",
       "link": "https://docs.microsoft.com/en-us/azure/aks/private-clusters"
     },
@@ -894,7 +1209,7 @@
       "description": "As you use base images for application images, use automation to build new images when the base image is updated. As those base images typically include security fixes, update any downstream application container images.",
       "subcategory": "resources",
       "category": "Governance and Security",
-      "guid": "ad9aaad2-2809-484e-8d3c-ca48da9a34b1",
+      "guid": "d8bc7b54-99cc-4071-a3dc-b47ccfd169c8",
       "severity": "Medium",
       "link": "https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-container-image-management#automatically-build-new-images-on-base-image-update"
     },
@@ -903,7 +1218,7 @@
       "description": "Starting with Kubernetes version 1.19, AKS will no longer allow the managed Kubernetes dashboard add-on to be installed for security reasons, and the add-on is scheduled to be deprecated. Ensure the Kubernetes dashboard is not installed on the cluster.",
       "subcategory": "security",
       "category": "Governance and Security",
-      "guid": "914c203f-23fb-4fba-b55c-5f1bde6b07cd",
+      "guid": "4fa71ba6-55ae-4388-8090-46083f583c35",
       "severity": "Medium",
       "link": ""
     },
@@ -912,7 +1227,7 @@
       "description": "AKS can authenticate to ACR without using any password, but by using either Service Principal or Managed Identity.",
       "subcategory": "security",
       "category": "Governance and Security",
-      "guid": "9bce59cf-27e7-47cb-9acb-c39608e2b666",
+      "guid": "6b38838d-5aac-4e1e-8ace-c70a1e52b96b",
       "severity": "Medium",
       "link": "https://docs.microsoft.com/en-us/azure/aks/cluster-container-registry-integration"
     },
@@ -921,7 +1236,7 @@
       "description": "By default, ETCD is encrypted at rest with keys managed by Microsoft. It is possible to encrypt the database using your own key using a KMS plugin and store the key in Azure Key Vault.",
       "subcategory": "security",
       "category": "Governance and Security",
-      "guid": "6f99a880-5a7a-46d1-ba78-c3b2729f2e03",
+      "guid": "4d8504d5-b1e9-4704-94a1-6e830136531e",
       "severity": "Low",
       "link": "https://docs.microsoft.com/en-us/azure/aks/use-kms-etcd-encryption"
     },
@@ -930,7 +1245,7 @@
       "description": "Many applications running for long periods of time eventually transition to broken states, and cannot recover except by being restarted. Kubernetes provides liveness probes to detect and remedy such situations. The probe is here to tell Kubernetes to restart your pod when it is not responding anymore",
       "subcategory": "development",
       "category": "Application Deployment",
-      "guid": "3f9a3307-461f-48e9-a826-28c85a991670",
+      "guid": "afb32c73-6f61-4ee8-bcae-e4cb0a69ca62",
       "severity": "High",
       "link": "https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/"
     },
@@ -939,7 +1254,7 @@
       "description": "Protect slow starting containers with startup probes. Startup probe allow to delay the initial check by liveness which could cause deadlock or wrong result",
       "subcategory": "development",
       "category": "Application Deployment",
-      "guid": "409a2d62-db32-49e2-b764-f922bf597cda",
+      "guid": "a805171d-8c22-4a18-93f8-9e2f2e1304c9",
       "severity": "Medium",
       "link": "https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/"
     },
@@ -948,7 +1263,7 @@
       "description": "Sometimes, applications are temporarily unable to serve traffic. For example, an application might need to load large data or configuration files during startup, or depend on external services after startup. In such cases, you donâ€™t want to kill the application, but you donâ€™t want to send it requests either. Kubernetes provides readiness probes to detect and mitigate these situations. A pod with containers reporting that they are not ready does not receive traffic through Kubernetes Services.",
       "subcategory": "development",
       "category": "Application Deployment",
-      "guid": "d8cf76ba-faa4-483d-bb65-bf17d18cd18e",
+      "guid": "240df0f1-97b1-43c5-ba90-2da07fc2e154",
       "severity": "Medium",
       "link": "https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/"
     },
@@ -957,7 +1272,7 @@
       "description": "This hook is called immediately before a container is terminated due to an API request or management event such as liveness probe failure, preemption, resource contention and others. It can be used when you have critical process you want to finish or save when your pod is destroyed for any reason",
       "subcategory": "development",
       "category": "Application Deployment",
-      "guid": "1c4ef5de-badb-4da2-bd32-e6f27d186dd0",
+      "guid": "9ea89de8-53a5-4038-a734-5185c3e5e691",
       "severity": "Low",
       "link": "https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/"
     },
@@ -966,7 +1281,7 @@
       "description": "Ensure that your application always configure proper replicas to ensure resiliency in the event of a pod crashing or being evicted.",
       "subcategory": "development",
       "category": "Application Deployment",
-      "guid": "1fe9c7c1-bee2-4cd6-9860-560addb9854d",
+      "guid": "62253e83-1471-48d2-a317-8ee16b70f12f",
       "severity": "Medium",
       "link": ""
     },
@@ -975,7 +1290,7 @@
       "description": "Ensure that your components are tagged, it could be business, security or technical tags and these tags will help to assess or apply relevant policies.",
       "subcategory": "development",
       "category": "Application Deployment",
-      "guid": "5b0e3bcf-6638-4b84-9987-29246fdf5d89",
+      "guid": "3bc838f9-26f4-4f0f-95ef-7313448951aa",
       "severity": "Medium",
       "link": ""
     },
@@ -984,7 +1299,7 @@
       "description": "Automatically scale your application to the number of pods required to handle the current load. This can be achieved by using Horizontal Pod Autoscaler for CPU & Memory or by using KEDA for scaling based on other sources",
       "subcategory": "resiliency",
       "category": "Application Deployment",
-      "guid": "fc477432-de3c-4a70-9bdb-a325a51a03b3",
+      "guid": "0f85eac3-3ddc-47d7-8334-66cb4949dbb4",
       "severity": "Low",
       "link": "https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/"
     },
@@ -993,7 +1308,7 @@
       "description": "Secrets are not encrypted in etcd, prefer to store your secrets in a proper HSM like Azure Key Vault. You can then inject secrets using CSI provider.",
       "subcategory": "security",
       "category": "Application Deployment",
-      "guid": "89a5dfe1-9a57-479d-9e62-d65e7478bf26",
+      "guid": "52ecf87a-5329-4208-b3de-a5e3afe8259f",
       "severity": "High",
       "link": "https://github.com/Azure/secrets-store-csi-driver-provider-azure"
     },
@@ -1002,7 +1317,7 @@
       "description": "Don't use fixed credentials within pods or container images, as they are at risk of exposure or abuse. Instead, use workload identity federation to access Azure Active Directory (Azure AD) protected resources without needing to manage secrets ",
       "subcategory": "security",
       "category": "Application Deployment",
-      "guid": "f17f799f-0943-4321-be6b-1aee84ea5b77",
+      "guid": "540af77b-6288-4a86-9a80-f785df050426",
       "severity": "Medium",
       "link": "https://azure.github.io/azure-workload-identity"
     },
@@ -1011,7 +1326,7 @@
       "description": "Namespaces give you the ability to create logical partitions and enforce separation of your resources as well as limit the scope of user permissions. Don't forget not to use the Default namespace",
       "subcategory": "security",
       "category": "Application Deployment",
-      "guid": "8335e030-df7e-4ff5-9f9c-a568924390fb",
+      "guid": "ff84ac5d-3108-4586-b019-3ac4c5108138",
       "severity": "Medium",
       "link": "https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/"
     },
@@ -1020,7 +1335,7 @@
       "description": "When Containers have resource requests specified, the scheduler can make better decisions about which nodes to place Pods on. And when Containers have their limits specified, contention for resources on a node can be handled in a specified manner.",
       "subcategory": "resources",
       "category": "Application Deployment",
-      "guid": "bb925fd9-67dd-47b8-bda3-5825840b8225",
+      "guid": "25950d20-13a5-4c88-a72e-c4aadbac8e68",
       "severity": "High",
       "link": "https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/"
     },
@@ -1029,7 +1344,7 @@
       "description": "A security context defines privilege and access control settings for a Pod or Container. Control the capabilities and the rights your container can have. If you don't specify the security context, the pod get the 'default' one which may have more rights that it should",
       "subcategory": "resources",
       "category": "Application Deployment",
-      "guid": "829ac32b-5bb8-48d9-9360-309b6de704ed",
+      "guid": "acded64e-7370-4dad-81de-30f7570cdc11",
       "severity": "Medium",
       "link": "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/"
     },
@@ -1038,7 +1353,7 @@
       "description": "Best practices inside the cluster start with the configuration of your manifests. Ensure that they respect good practices",
       "subcategory": "resources",
       "category": "Application Deployment",
-      "guid": "2aaef5e8-ecef-4737-861a-8d40840456f3",
+      "guid": "cd6defa7-becd-4fa2-b4e3-4e29a5c89787",
       "severity": "Medium",
       "link": "https://thechief.io/c/editorial/kubernetes-yaml-enforcing-best-practices-and-security-policies-cicd-and-gitops-pipelines/"
     },
@@ -1047,7 +1362,7 @@
       "description": "Define a Image build security baseline for your developers to follow. You should also use scanning tools to detect Dockerfile issue",
       "subcategory": "security",
       "category": "Application Deployment",
-      "guid": "0e3c2d5c-2714-44fb-a1b8-b0e1f22bdf93",
+      "guid": "e0d62777-7cb2-40f0-bb56-1592469b6e1f",
       "severity": "High",
       "link": "https://snyk.io/blog/10-docker-image-security-best-practices/"
     },
@@ -1056,7 +1371,7 @@
       "description": "Introduction of DevSecOps into the environment to promote a proactive security model that starts to shift the responsibility left",
       "subcategory": "security",
       "category": "Application Deployment",
-      "guid": "3d2c7588-cc7c-4904-b314-ea72b112959c",
+      "guid": "0dcdec44-d993-401a-8f00-e6bba5227061",
       "severity": "High",
       "link": "https://docs.microsoft.com/en-us/azure/defender-for-cloud/defender-for-containers-introduction"
     },
@@ -1065,7 +1380,7 @@
       "description": "Restrict builds with identified issues.",
       "subcategory": "security",
       "category": "Application Deployment",
-      "guid": "862344c8-9738-4948-9499-625b43398a69",
+      "guid": "f03b2857-567f-4455-8579-fde68f8bac44",
       "severity": "Medium",
       "link": "https://docs.paloaltonetworks.com/prisma/prisma-cloud/prisma-cloud-admin-compute/vulnerability_management/vuln_management_rules.html"
     },
@@ -1074,7 +1389,7 @@
       "description": "Being able to assess and restrict the Compliance state of an image on build.",
       "subcategory": "security",
       "category": "Application Deployment",
-      "guid": "aa8e8104-007f-44e3-8b0d-459291f28387",
+      "guid": "edaa060a-dc49-426f-880e-d526c77bef4e",
       "severity": "High",
       "link": "https://docs.microsoft.com/en-us/azure/aks/policy-samples"
     },
@@ -1083,7 +1398,7 @@
       "description": "The App Containerization tool offers a point-and-containerize approach to repackage applications as containers with minimal to no code changes by using the running state of the application. The tool currently supports containerizing ASP.NET applications and Java web applications running on Apache Tomcat.",
       "subcategory": "development",
       "category": "Application Deployment",
-      "guid": "e9bfee31-0e54-4244-b017-4bae88cf3b44",
+      "guid": "4935d15d-6e01-4b8e-9b5a-bea2463e0f61",
       "severity": "Low",
       "link": "https://aka.ms/AppContainerizationtoAKS"
     },
@@ -1092,7 +1407,7 @@
       "description": "There are a variety of techniques to deploy new applications to production so choosing the right strategy is an important decision that needs to be made to leverage the impact of change on the consumer.",
       "subcategory": "development",
       "category": "Application Deployment",
-      "guid": "c6cb3ccb-834a-4206-98c5-e44128c7c2bf",
+      "guid": "fbde281c-fa57-4b60-bc8b-6f7ce6d72900",
       "severity": "Low",
       "link": "https://blog.container-solutions.com/deployment-strategies"
     },
@@ -1101,7 +1416,7 @@
       "description": "Naked pods are pods not linked to a Replicaset or a Deployment. Naked Pods will not be rescheduled in the event of a node failure.",
       "subcategory": "development",
       "category": "Application Deployment",
-      "guid": "7850e4ba-e264-4f2b-aac9-d6f0c6f87d04",
+      "guid": "418907d5-a817-45fa-8ad4-3ec7c7dc9b73",
       "severity": "Low",
       "link": ""
     },
@@ -1110,7 +1425,7 @@
       "description": "If this attributes is not properly define kubernetes downloads the container image for each new instance of the containers.",
       "subcategory": "development",
       "category": "Application Deployment",
-      "guid": "e4b16f37-2525-4c13-a507-cd59ade56ff3",
+      "guid": "d478c7e6-5a1c-4364-bb3d-01d3abe3320a",
       "severity": "Low",
       "link": "https://kubernetes.io/docs/concepts/containers/images/#updating-images"
     },
@@ -1119,7 +1434,7 @@
       "description": "A whitespace (greenfield) deployment is the exercise to delete everything and to redeploy the whole platform in an automated way.",
       "subcategory": "devops",
       "category": "BC and DR",
-      "guid": "f61f2f44-bab5-404c-a483-1f5e160b0a80",
+      "guid": "bc937797-c84a-4a78-bbc4-c2d945e24538",
       "severity": "High",
       "link": ""
     },
@@ -1128,7 +1443,7 @@
       "description": "An Azure Kubernetes Service (AKS) cluster distributes resources such as the nodes and storage across logical sections of the underlying Azure compute infrastructure. This deployment model makes sure that the nodes run across separate update and fault domains in a single Azure datacenter.",
       "subcategory": "resiliency",
       "category": "BC and DR",
-      "guid": "2138545d-2eaa-4822-b070-0d67fa97e3a5",
+      "guid": "64154e31-2272-4ce7-afce-cdd2d1846d7e",
       "severity": "High",
       "link": "https://docs.microsoft.com/en-us/azure/aks/availability-zones#create-an-aks-cluster-across-availability-zones"
     },
@@ -1137,7 +1452,7 @@
       "description": "When you deploy multiple AKS clusters, choose regions where AKS is available, and use paired regions.",
       "subcategory": "resiliency",
       "category": "BC and DR",
-      "guid": "be156e9a-28ff-4798-a3e5-8a6b7933805c",
+      "guid": "7ab5321a-75a8-43bc-ae31-cf958cb8aa2d",
       "severity": "Medium",
       "link": "https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-multi-region#plan-for-multiregion-deployment"
     },
@@ -1146,7 +1461,7 @@
       "description": "Azure Traffic Manager can direct customers to their closest AKS cluster and application instance. For the best performance and redundancy, direct all application traffic through Traffic Manager before it goes to your AKS cluster.",
       "subcategory": "resiliency",
       "category": "BC and DR",
-      "guid": "e067c763-9d54-4114-98e2-327547da8ad7",
+      "guid": "db4d699a-aa42-4a94-bbed-495f14b7b4af",
       "severity": "Low",
       "link": "https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-multi-region#use-azure-traffic-manager-to-route-traffic"
     },
@@ -1155,7 +1470,7 @@
       "description": "Your applications might use Azure Storage for their data. Because your applications are spread across multiple AKS clusters in different regions, you need to keep the storage synchronized",
       "subcategory": "resiliency",
       "category": "BC and DR",
-      "guid": "b1f4ca8c-82f9-4e94-8fd9-ff9ddd9794d8",
+      "guid": "c82d8149-b808-4bab-a678-d91eca52d71f",
       "severity": "Low",
       "link": "https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-multi-region#create-a-storage-migration-plan"
     },
@@ -1164,7 +1479,7 @@
       "description": "Uptime SLA is an optional feature to enable a financially backed, higher SLA for a cluster. It provides you a 99,95% SLA instead of the 99,5% SLO and is relevant for your production clusters",
       "subcategory": "resiliency",
       "category": "BC and DR",
-      "guid": "60813014-a49a-4b0b-8fd5-9439a4da1a36",
+      "guid": "407233d7-8b03-466b-8b89-c5504707d799",
       "severity": "Low",
       "link": "https://docs.microsoft.com/en-us/azure/aks/uptime-sla"
     },
@@ -1173,7 +1488,7 @@
       "description": "Even if you run several copies of your Pods, there are no guarantees that losing a node won't take down your service.",
       "subcategory": "resiliency",
       "category": "BC and DR",
-      "guid": "64b9add2-3dec-4f92-a4a9-bf8f912614b8",
+      "guid": "1ecaa16e-7ed0-4b3f-90f3-7ca239d87f06",
       "severity": "Low",
       "link": "https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity"
     },
@@ -1182,7 +1497,7 @@
       "description": "Companies that want a local presence, or a hot backup, choose to run services from multiple Azure regions.",
       "subcategory": "resiliency",
       "category": "BC and DR",
-      "guid": "638450e7-005d-4c99-a347-88d72e46f09a",
+      "guid": "be1abc39-fca5-4eb8-94ba-d7dac8c8f3c8",
       "severity": "Medium",
       "link": "https://docs.microsoft.com/en-us/azure/container-registry/container-registry-geo-replication"
     },
@@ -1191,7 +1506,7 @@
       "description": "Azure Kubernetes Service (AKS) can be configured to use Azure Active Directory (Azure AD) for user authentication. In this configuration, you can sign in to an AKS cluster by using your Azure AD authentication token.",
       "subcategory": "security",
       "category": "Identity and Access Management",
-      "guid": "5c53566b-e9e2-4ed7-8fa9-b07922d63bda",
+      "guid": "65b0dac6-2b3c-4e4f-b1ab-b0ccb63edd3d",
       "severity": "High",
       "link": "https://docs.microsoft.com/en-us/azure/aks/managed-aad"
     },
@@ -1200,7 +1515,7 @@
       "description": "Each AKS cluster needs either a Managed Identity or Service Principal.  We recommend using Managed Identity in AKS",
       "subcategory": "security",
       "category": "Identity and Access Management",
-      "guid": "f47562e9-1747-4dc4-80fd-460ff358bd12",
+      "guid": "ee847b39-03b9-4b84-8ac0-c7460a4dcc89",
       "severity": "High",
       "link": "https://docs.microsoft.com/en-us/azure/aks/use-managed-identity"
     },
@@ -1209,7 +1524,7 @@
       "description": "Control access to cluster resources using Kubernetes role-based access control and Azure Active Directory identities in Azure Kubernetes Service",
       "subcategory": "security",
       "category": "Identity and Access Management",
-      "guid": "d99e3be6-bc53-4c7e-ba7c-215a9f58071f",
+      "guid": "e869e232-3270-44fa-be6e-b18eec846028",
       "severity": "High",
       "link": "https://docs.microsoft.com/en-us/azure/aks/azure-ad-rbac"
     },
@@ -1218,7 +1533,7 @@
       "description": "For integration with existing virtual networks or on-premises networks, use Azure CNI networking in AKS. This network model also allows greater separation of resources and controls in an enterprise environment but be aware of the impact on the network topology/IP ranges",
       "subcategory": "network",
       "category": "Network Topology and Connectivity",
-      "guid": "5a495acb-e8e7-4565-884d-b1bd7b5c4743",
+      "guid": "148072dd-bea6-4db4-a9d8-e5cf708ccae6",
       "severity": "Medium",
       "link": "https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-network#choose-the-appropriate-network-model"
     },
@@ -1227,7 +1542,7 @@
       "description": "The size of your virtual network and its subnet must accommodate the number of pods you plan to run and the number of nodes for the cluster.",
       "subcategory": "network",
       "category": "Network Topology and Connectivity",
-      "guid": "095e42d7-75a2-4ace-8a4d-4d605f843b81",
+      "guid": "cf94db78-3d97-4c3b-aa25-6ac857cc4154",
       "severity": "Medium",
       "link": "https://docs.microsoft.com/en-us/azure/aks/configure-azure-cni#plan-ip-addressing-for-your-cluster"
     },
@@ -1236,7 +1551,7 @@
       "description": "To distribute HTTP or HTTPS traffic to your applications, use ingress resources and controllers. Ingress controllers provide additional features over a regular Azure load balancer, and can be managed as native Kubernetes resources.",
       "subcategory": "network",
       "category": "Network Topology and Connectivity",
-      "guid": "255daa4d-8407-4e5c-9c54-a9a0b1c85a41",
+      "guid": "e27399d0-1199-4cf6-8482-1df676fb3c58",
       "severity": "Medium",
       "link": "https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-network#distribute-ingress-traffic"
     },
@@ -1245,7 +1560,7 @@
       "description": "If you plan to host exposed applications, to scan incoming traffic for potential attacks, use a web application firewall (WAF) such as Barracuda WAF for Azure or Azure Application Gateway. These more advanced network resources can also route traffic beyond just HTTP and HTTPS connections or basic SSL termination.",
       "subcategory": "network",
       "category": "Network Topology and Connectivity",
-      "guid": "d461b3dd-2bf5-473e-b3f7-098fc2a173ee",
+      "guid": "5d88b385-bdf0-4277-8523-d2ebae35cf6a",
       "severity": "Medium",
       "link": "https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-network#secure-traffic-with-a-web-application-firewall-waf"
     },
@@ -1254,7 +1569,7 @@
       "description": "When a user creates an Ingress manifest, they can use any hostname in it. You may want to control which hostnames are allowed to use, like your company's hostnames.",
       "subcategory": "network",
       "category": "Network Topology and Connectivity",
-      "guid": "a0cdde45-b715-42ed-ac2a-435d9b4f9b57",
+      "guid": "c02d93b0-3fdd-4dbe-a763-e456f11f95fa",
       "severity": "Medium",
       "link": "https://www.openpolicyagent.org/docs/latest/kubernetes-tutorial/#4-define-a-policy-and-load-it-into-opa-via-kubernetes"
     },
@@ -1263,7 +1578,7 @@
       "description": "There is almost no reason to directly expose the ingress entry point to Internet but by default AKS create a public one. Tell him to create an internal one only.",
       "subcategory": "network",
       "category": "Network Topology and Connectivity",
-      "guid": "4a90134c-4ed9-4acb-a249-d685fd6abbaa",
+      "guid": "23d3ca74-996b-4511-b72a-b3a32ccc5f52",
       "severity": "Medium",
       "link": "https://docs.microsoft.com/en-us/azure/aks/ingress-internal-ip"
     },
@@ -1272,7 +1587,7 @@
       "description": "Use network policies to allow or deny traffic to pods. By default, all traffic is allowed between pods within a cluster. For improved security, define rules that limit pod communication.",
       "subcategory": "network",
       "category": "Network Topology and Connectivity",
-      "guid": "b909c5f3-2727-432e-9ea7-7446ce38bcd5",
+      "guid": "47ff7a95-d1b3-4259-a4ff-314808581f70",
       "severity": "Medium",
       "link": "https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-network#control-traffic-flow-with-network-policies"
     },
@@ -1281,7 +1596,7 @@
       "description": "Start by creating a deny all policy in each namespace and then add specific policies.",
       "subcategory": "network",
       "category": "Network Topology and Connectivity",
-      "guid": "88c90d8c-789d-4d4f-bb9b-156c2c0af986",
+      "guid": "cdce6dff-4e4c-4a02-83aa-a3f76e89e44a",
       "severity": "Medium",
       "link": "https://github.com/ahmetb/kubernetes-network-policy-recipes"
     },
@@ -1290,7 +1605,7 @@
       "description": "Use Azure Firewall to secure and control all egress traffic going outside of the cluster.",
       "subcategory": "network",
       "category": "Network Topology and Connectivity",
-      "guid": "2f88befa-94ad-49f0-b8c3-50e77b42b860",
+      "guid": "60ace839-6a68-4a50-8fff-9335e3ca2848",
       "severity": "Medium",
       "link": "https://docs.microsoft.com/en-us/azure/aks/limit-egress-traffic"
     },
@@ -1299,7 +1614,7 @@
       "description": "When possible, use private link to only allow private network to reach your registry.",
       "subcategory": "network",
       "category": "Network Topology and Connectivity",
-      "guid": "be2aee5c-5037-405d-b3d9-eedef319898f",
+      "guid": "5d209d65-76e9-4b40-8028-93ae2de62c1b",
       "severity": "Low",
       "link": "https://docs.microsoft.com/en-us/azure/container-registry/container-registry-private-link"
     },
@@ -1308,7 +1623,7 @@
       "description": "By default, Pods have access to VMSS IMDS and can request access token from the attached Managed Identity. This access should be restriced by using Network Policy.",
       "subcategory": "network",
       "category": "Network Topology and Connectivity",
-      "guid": "d0a59a45-f95f-4581-99ce-72b100a59692",
+      "guid": "70c9207a-1848-45f1-82a8-ad4d95e697b8",
       "severity": "Medium",
       "link": "https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/how-to-use-vm-token#get-a-token-using-curl"
     },
@@ -1317,7 +1632,7 @@
       "description": "Azure Traffic Manager can direct customers to their closest AKS cluster and application instance. For the best performance and redundancy, direct all application traffic through Traffic Manager before it goes to your AKS cluster.",
       "subcategory": "network",
       "category": "Network Topology and Connectivity",
-      "guid": "c6977ee4-c09a-4570-b746-5d5b456a415f",
+      "guid": "edf75792-8213-4c74-9464-c8c266b09047",
       "severity": "Medium",
       "link": "https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-multi-region#use-azure-traffic-manager-to-route-traffic"
     },
@@ -1326,7 +1641,7 @@
       "description": "To stay current on new features and bug fixes, regularly upgrade to the Kubernetes version in your AKS cluster. Support for kubernetes is current and N-2 versions only",
       "subcategory": "operation",
       "category": "Operations",
-      "guid": "682fd292-27f0-49be-9d93-884e415613ea",
+      "guid": "3a346b23-9242-4fec-9a4c-2725db73c6fc",
       "severity": "Medium",
       "link": "https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-cluster-security#regularly-update-to-the-latest-version-of-kubernetes"
     },
@@ -1335,7 +1650,7 @@
       "description": "AKS supports upgrading the images on a node so you're up to date with the newest OS and runtime updates. AKS provides one new image per week with the latest updates, so it's beneficial to upgrade your node's images regularly for the latest features, including Linux or Windows patches",
       "subcategory": "operation",
       "category": "Operations",
-      "guid": "7792c34a-34a8-41d6-9c25-6ac57f029876",
+      "guid": "f74cf971-00f7-479d-a77a-e0fb0fe70f1c",
       "severity": "High",
       "link": "https://docs.microsoft.com/en-us/azure/aks/node-image-upgrade"
     },
@@ -1344,7 +1659,7 @@
       "description": "Don't expose remote connectivity to your AKS nodes. Create a bastion host, or jump box, in a management virtual network. Use the bastion host to securely route traffic into your AKS cluster to remote management tasks.",
       "subcategory": "operation",
       "category": "Operations",
-      "guid": "6c3eea31-ea1b-4bd6-9bad-25ef51dc0f2e",
+      "guid": "bebd2ea0-5cfa-4b97-b027-768c4b3a50e7",
       "severity": "Medium",
       "link": "https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-network#securely-connect-to-nodes-through-a-bastion-host"
     },
@@ -1353,7 +1668,7 @@
       "description": "Regularly run the latest version of cluster scanning open source tool to detect issues in your cluster. For instance, if you apply resource quotas on an existing AKS cluster, run kubestriker first to find pods that don't have resource requests and limits defined.",
       "subcategory": "operation",
       "category": "Operations",
-      "guid": "4ec2d375-1020-4c82-97f6-fe264a22e9b3",
+      "guid": "47c8383d-69ad-4eca-b6e2-50a848067fe2",
       "severity": "Medium",
       "link": "https://github.com/Azure/aks-periscope"
     },
@@ -1362,7 +1677,7 @@
       "description": "Security Center brings security benefits to your AKS clusters using data already gathered by the AKS master node.",
       "subcategory": "operation",
       "category": "Operations",
-      "guid": "efa07ed8-f9b4-4185-bc60-020c006f02a3",
+      "guid": "a3ac15cb-b0d3-44c5-ab60-a5a7b7d188fb",
       "severity": "Medium",
       "link": "https://docs.microsoft.com/en-us/azure/security-center/azure-kubernetes-service-integration"
     },
@@ -1371,7 +1686,7 @@
       "description": "Ensure that you are always aware of what happens in your cluster. Monitor the health of the cluster (nodes, server) but also the pods",
       "subcategory": "operation",
       "category": "Operations",
-      "guid": "009bc136-5942-482c-991d-923f9d69b469",
+      "guid": "07c3b4d5-2f21-4a45-b707-514000ba35b3",
       "severity": "High",
       "link": "https://docs.microsoft.com/en-us/azure/azure-monitor/insights/container-insights-analyze"
     },
@@ -1380,7 +1695,7 @@
       "description": "To help troubleshoot your application and services, you may need to view the logs generated by the master components. Be aware that if you don't enable these logs, there is no way for Microsoft to retrieve them for you",
       "subcategory": "operation",
       "category": "Operations",
-      "guid": "94208711-79b4-41ba-8dc1-28bded12aafc",
+      "guid": "191cd80b-958f-4e3b-bd4a-e11c22744641",
       "severity": "High",
       "link": "https://docs.microsoft.com/en-us/azure/aks/view-control-plane-logs"
     },
@@ -1389,7 +1704,7 @@
       "description": "If default integration can collect telemetry data and basic metrics (CPU/Memory), they don't collect custom metrics and more detailed information. It's often necessary to install a 3rd party software (prometheus is recommend within Kubernetes) and they store these metrics to exploit them.",
       "subcategory": "operation",
       "category": "Operations",
-      "guid": "7052ca28-1564-4ac4-9b15-2c679ce1eac1",
+      "guid": "a2bd6bca-b4bf-4dca-bfb2-03a5cd7e9dd3",
       "severity": "High",
       "link": "https://docs.microsoft.com/en-us/azure/azure-monitor/insights/container-insights-prometheus-integration"
     },
@@ -1398,7 +1713,7 @@
       "description": "Distributed tracing, also called distributed request tracing, is a method used to profile and monitor applications, especially those built using a microservices architecture. Distributed tracing helps pinpoint where failures occur and what causes poor performance.",
       "subcategory": "operation",
       "category": "Operations",
-      "guid": "6242181b-7f23-4cc0-bb85-821f6c4f71d4",
+      "guid": "72d7df2b-d72d-4fdb-8fc9-63d3dea1be4a",
       "severity": "Low",
       "link": "https://github.com/microsoft/Application-Insights-K8s-Codeless-Attach"
     },
@@ -1407,7 +1722,7 @@
       "description": "Azure Policy integrates with the Azure Kubernetes Service (AKS) to apply at-scale enforcements and safeguards on your clusters in a centralized, consistent manner.",
       "subcategory": "operation",
       "category": "Operations",
-      "guid": "2256423d-95df-46dd-9362-321a2f99ea1d",
+      "guid": "b5a7d0b7-b293-4242-a870-23c9a8b24581",
       "severity": "Medium",
       "link": "https://docs.microsoft.com/en-us/azure/governance/policy/concepts/rego-for-aks"
     },
@@ -1416,7 +1731,7 @@
       "description": "This whitepaper provides an overview of key aspects and best practices of K8s security",
       "subcategory": "operation",
       "category": "Operations",
-      "guid": "3542a8eb-91e0-46b2-8c2a-5da7d7ea209f",
+      "guid": "062195bf-206f-4b73-a51d-dd5cb4c5bc3c",
       "severity": "High",
       "link": "https://info.aquasec.com/securing_kubernetes"
     },
@@ -1425,7 +1740,7 @@
       "description": "Microsoft Defender for Kubernetes provides protections for your Kubernetes clusters wherever they're running (AKS and on-premesis)",
       "subcategory": "operation",
       "category": "Operations",
-      "guid": "275d19e9-291e-439a-9e4d-bf0547560f19",
+      "guid": "cecad1db-e806-4668-9ae9-2556327f0e3c",
       "severity": "High",
       "link": "https://docs.microsoft.com/en-us/azure/defender-for-cloud/defender-for-containers-introduction"
     },
@@ -1434,7 +1749,7 @@
       "description": "Use Azure Key Vault to store Secrets and Certificates",
       "subcategory": "operation",
       "category": "Operations",
-      "guid": "76b1dd91-3174-4852-977f-d00a076b06d1",
+      "guid": "d026cff4-1f73-49b7-8070-2888665307aa",
       "severity": "High",
       "link": "https://docs.microsoft.com/en-us/azure/key-vault/general/key-vault-integrate-kubernetes"
     },
@@ -1443,7 +1758,7 @@
       "description": "GitOps works by using Git as a single source of truth for declarative infrastructure and applications",
       "subcategory": "operation",
       "category": "Operations",
-      "guid": "11bea1e0-c09f-4d74-a5b9-afa35a0d4bca",
+      "guid": "c41f7aa0-31e3-44b6-993b-becdb5b3e22c",
       "severity": "High",
       "link": "https://www.weave.works/technologies/gitops"
     },
@@ -1452,7 +1767,7 @@
       "description": "The Kubernetes ecosystem is strengthened by many tools that make operating it easier.  Here's a few",
       "subcategory": "operation",
       "category": "Operations",
-      "guid": "e9cc4334-c5e5-4cf1-8696-f1a308491dc7",
+      "guid": "62cea8e0-9f54-4691-beee-742fbe4b3faf",
       "severity": "Medium",
       "link": "https://helm.sh"
     },
@@ -1461,7 +1776,7 @@
       "description": "It's recommended to keep all applications in a namespace other than default",
       "subcategory": "operation",
       "category": "Operations",
-      "guid": "ee81990c-f198-4146-a833-69260f0cc548",
+      "guid": "ee54b0e5-c816-4cc5-90cd-b2fc3cf75bf4",
       "severity": "Medium",
       "link": ""
     },
@@ -1470,7 +1785,7 @@
       "description": "A common set of labels allows tools to work interoperably, describing objects in a common manner that all tools can understand. For instance, resources should have technical, business and security labels. ",
       "subcategory": "network",
       "category": "Operations",
-      "guid": "30e0aa8e-2d9f-48ec-938e-6ead1793770e",
+      "guid": "8a80cb3a-177b-4b9b-858c-0e65466dcc55",
       "severity": "Low",
       "link": "https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/"
     },
@@ -1479,7 +1794,7 @@
       "description": "Use logical isolation to separate teams and projects. Try to minimize the number of physical AKS clusters you deploy to isolate teams or applications",
       "subcategory": "other",
       "category": "Operations",
-      "guid": "3c5dfc34-98f2-424a-894a-63273ab1da0d",
+      "guid": "c4783159-ba28-4961-b3fb-6fa516e93d48",
       "severity": "Medium",
       "link": "https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-cluster-isolation#logically-isolate-clusters"
     },
@@ -1488,7 +1803,7 @@
       "description": "Minimize the use of physical isolation for each separate team or application deployment",
       "subcategory": "other",
       "category": "Operations",
-      "guid": "970959a0-5a97-4dca-89d8-42659c5e197a",
+      "guid": "b8525e9e-8d19-4ee8-ac5f-cd35eef8c160",
       "severity": "High",
       "link": "https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-cluster-isolation#physically-isolate-clusters"
     },
@@ -1497,7 +1812,7 @@
       "description": "Prefer fewer, larger clusters over of many, smaller clusters",
       "subcategory": "operation",
       "category": "Operations",
-      "guid": "6e3e9710-f2b0-4710-94e8-32d420a26b78",
+      "guid": "c5050098-b015-4d48-a5dd-6863bb69b6b9",
       "severity": "Medium",
       "link": "https://learnk8s.io/kubernetes-instance-calculator"
     },
@@ -1506,7 +1821,7 @@
       "description": "In addition to manually upgrading a cluster, you can set an auto-upgrade channel on your cluster",
       "subcategory": "operation",
       "category": "Operations",
-      "guid": "04404930-b330-4696-aa5e-9cd0ff8c420b",
+      "guid": "be291aa0-8206-4235-8129-5eb97a90a22c",
       "severity": "Medium",
       "link": "https://docs.microsoft.com/en-us/azure/aks/upgrade-cluster#set-auto-upgrade-channel"
     },
@@ -1515,7 +1830,7 @@
       "description": "Customizing your node configuration allows you to configure or tune your operating system (OS) settings or the kubelet parameters to match the needs of the workloads.",
       "subcategory": "network",
       "category": "Operations",
-      "guid": "20c465d5-04d4-4cf9-acfd-5d00872d87f1",
+      "guid": "ab585c0f-f7cb-49f4-844d-b551117368f2",
       "severity": "Low",
       "link": "https://docs.microsoft.com/en-us/azure/aks/custom-node-configuration"
     },
@@ -1524,7 +1839,7 @@
       "description": "Cluster extensions provides an Azure Resource Manager driven experience for installation and lifecycle management of services like Azure Machine Learning (ML) on an AKS cluster. ",
       "subcategory": "other",
       "category": "Operations",
-      "guid": "1b8df824-c6fe-41c6-80b7-59947a3c8df1",
+      "guid": "df8d34c5-ae51-45b5-acf5-9ca7e1f4ad48",
       "severity": "Low",
       "link": "https://docs.microsoft.com/en-gb/azure/aks/cluster-extensions"
     },
@@ -1533,7 +1848,7 @@
       "description": "Plan and apply resource quotas at the namespace level. If pods don't define resource requests and limits, reject the deployment. Monitor resource usage and adjust quotas as needed.",
       "subcategory": "resiliency",
       "category": "Resource management",
-      "guid": "debbac24-b1ba-4dee-a648-4d7f082c1e4c",
+      "guid": "cc93dfdd-276b-4c01-802b-e1815bb45810",
       "severity": "Low",
       "link": "https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-scheduler#enforce-resource-quotas"
     },
@@ -1542,7 +1857,7 @@
       "description": " A LimitRange is a policy to constrain resource allocations (to Pods or Containers) in a namespace. It's useful to ensure that pods don't forget to declare request limits",
       "subcategory": "resiliency",
       "category": "Resource management",
-      "guid": "2d53ad8c-7eb7-4c16-a126-f8ee66f4a1c2",
+      "guid": "562d8801-07c3-4074-a03f-87038f325750",
       "severity": "Low",
       "link": "https://kubernetes.io/docs/concepts/policy/limit-range/"
     },
@@ -1551,7 +1866,7 @@
       "description": "Set CPU and memory limits and requests to all the containers. It prevents memory leaks and CPU over-usage and protects the whole platform",
       "subcategory": "resiliency",
       "category": "Resource management",
-      "guid": "80616294-f7f4-45dd-b06a-d303ea70d467",
+      "guid": "e59c6a60-2494-40ae-bf58-128fbf60fb39",
       "severity": "Medium",
       "link": "https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/"
     },
@@ -1560,7 +1875,7 @@
       "description": "To maintain the availability of applications, define Pod Disruption Budgets (PDBs) to make sure that a minimum number of pods are available in the cluster.",
       "subcategory": "resiliency",
       "category": "Resource management",
-      "guid": "bd2881c4-6a22-4e40-a701-1cce4b5dc4b3",
+      "guid": "7dfc4082-f5d7-4eda-901b-8ae22d0effcd",
       "severity": "Low",
       "link": "https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-scheduler#plan-for-availability-using-pod-disruption-budgets"
     },
@@ -1569,7 +1884,7 @@
       "description": "To maintain the availability of applications and guarantee available resources, set up cluster auto-scaling",
       "subcategory": "resiliency",
       "category": "Resource management",
-      "guid": "02e54a3d-ba26-4386-9cb4-25b66d2332b3",
+      "guid": "713c7428-658d-4191-b557-f399ab288c7a",
       "severity": "Low",
       "link": "https://docs.microsoft.com/en-us/azure/aks/cluster-autoscaler"
     },
@@ -1578,7 +1893,7 @@
       "description": "To keep up with application demands in Azure Kubernetes Service (AKS), you may need to adjust the number of nodes that run your workloads. The cluster autoscaler component can watch for pods in your cluster that can't be scheduled because of resource constraints.",
       "subcategory": "resources",
       "category": "Resource management",
-      "guid": "ae6fd194-2454-4a7b-b4e1-d14662f49eea",
+      "guid": "f7437eb7-f905-432e-acfd-5f9a0d8c8d6e",
       "severity": "Medium",
       "link": "https://docs.microsoft.com/en-us/azure/aks/cluster-autoscaler"
     },
@@ -1587,7 +1902,7 @@
       "description": "what type of worker nodes should I use, and how many of them is a critical question which requires the analysis of the workloads deployed on your cluster to get the best values of it",
       "subcategory": "resources",
       "category": "Resource management",
-      "guid": "3adf866b-0a10-4f2d-b02a-8e00a56de2bc",
+      "guid": "546f5e69-bb05-43c6-91e1-6d8aa628b477",
       "severity": "Medium",
       "link": "https://learnk8s.io/kubernetes-node-size"
     },
@@ -1596,7 +1911,7 @@
       "description": "When deploying your application in Azure, spreading Virtual Machine (VM) instances across regions or availability zones creates network latency, which may impact the overall performance of your application. A proximity placement group is a logical grouping used to make sure Azure compute resources are physically located close to each other",
       "subcategory": "security",
       "category": "Resource management",
-      "guid": "f9c727e8-b77e-45f9-97c4-2f0387ba231b",
+      "guid": "5c5b8628-3e5f-4e4c-84ef-1e166bf325a2",
       "severity": "Low",
       "link": "https://docs.microsoft.com/en-us/azure/aks/reduce-latency-ppg"
     },
@@ -1605,7 +1920,7 @@
       "description": "Understand the needs of your application to pick the right storage. Use high performance, SSD-backed storage for production workloads. Plan for network-based storage when there is a need for multiple concurrent connections.",
       "subcategory": "storage",
       "category": "Storage",
-      "guid": "5ac6509c-a5eb-47e6-bc4e-4a2cd14155f1",
+      "guid": "11272322-5bb5-48a3-954a-78d35a2dde3e",
       "severity": "High",
       "link": "https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-storage#choose-the-appropriate-storage-type"
     },
@@ -1614,7 +1929,7 @@
       "description": "Each node size supports a maximum number of disks. Different node sizes also provide different amounts of local storage and network bandwidth. Plan for your application demands to deploy the appropriate size of nodes.",
       "subcategory": "storage",
       "category": "Storage",
-      "guid": "6705fe46-0e86-4a49-b12c-f943811cd9c5",
+      "guid": "de008b1a-2127-4908-a840-de8af19e7001",
       "severity": "Medium",
       "link": "https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-storage#size-the-nodes-for-storage-needs"
     },
@@ -1623,7 +1938,7 @@
       "description": "To reduce management overhead and let you scale, don't statically create and assign persistent volumes. Use dynamic provisioning. In your storage classes, define the appropriate reclaim policy to minimize unneeded storage costs once pods are deleted.",
       "subcategory": "storage",
       "category": "Storage",
-      "guid": "b247e202-ff36-4add-a5a3-a27f6dcf6fe1",
+      "guid": "73bc99bd-fea4-4a45-99a8-140628af2100",
       "severity": "Low",
       "link": "https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-storage#dynamically-provision-volumes"
     },
@@ -1632,7 +1947,7 @@
       "description": "Back up your data using an appropriate tool for your storage type, such as Velero or Azure Site Recovery",
       "subcategory": "storage",
       "category": "Storage",
-      "guid": "686b961a-9695-4526-98a1-78db36f79810",
+      "guid": "cf81fcb1-ee4c-4b14-920b-21789aebb1a1",
       "severity": "Medium",
       "link": "https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-storage#secure-and-back-up-your-data"
     },
@@ -1641,7 +1956,7 @@
       "description": "Where possible, don't store service state inside the container. Instead, use an Azure platform as a service (PaaS) that supports multiregion replication.",
       "subcategory": "storage",
       "category": "Storage",
-      "guid": "a6f6f733-bafa-4dcd-aa96-c752578ff4a2",
+      "guid": "645758eb-a599-4235-90aa-233e848cdc04",
       "severity": "High",
       "link": "https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-multi-region#remove-service-state-from-inside-containers"
     },
@@ -1650,7 +1965,7 @@
       "description": "Windows has strict compatibility rules, where the host OS version must match the container base image OS version. Only Windows containers with a container operating system of Windows Server 2019 are supported.",
       "subcategory": "windows",
       "category": "Windows",
-      "guid": "467eb3a8-a33d-4c8c-ba67-9ea2c357ccde",
+      "guid": "704cf290-d604-4914-beb3-f0a667fbf962",
       "severity": "High",
       "link": "https://docs.microsoft.com/en-us/virtualization/windowscontainers/deploy-containers/version-compatibility?tabs=windows-server-2019%2Cwindows-10-1909"
     },
@@ -1659,7 +1974,7 @@
       "description": "TerminationGracePeriod is not implemented on Windows containers",
       "subcategory": "windows",
       "category": "Windows",
-      "guid": "dadd4088-663d-4439-99f5-625f0755fb07",
+      "guid": "3b1ef4d7-689b-451b-ba78-b026fedb847f",
       "severity": "Medium",
       "link": "https://cloud.google.com/blog/products/gcp/kubernetes-best-practices-terminating-with-grace"
     },
@@ -1668,7 +1983,7 @@
       "description": "Windows containers do not support elevation of privilege",
       "subcategory": "windows",
       "category": "Windows",
-      "guid": "794b62b4-c578-4569-ae57-36beadbb4522",
+      "guid": "9cd0abbb-d923-4a62-a166-8ec316bc8255",
       "severity": "Medium",
       "link": "https://kubernetes.io/docs/setup/production-environment/windows/intro-windows-in-kubernetes/#supported-functionality-and-limitations"
     },
@@ -1677,7 +1992,7 @@
       "description": "There are no OOM eviction actions taken by the kubelet. Windows always treats all user-mode memory allocations as virtual, and pagefiles are mandatory. If memory is over-provisioned and all physical memory is exhausted, then paging can slow down performance.",
       "subcategory": "windows",
       "category": "Windows",
-      "guid": "e3f1b8c5-b120-444d-abde-3ad5e56413b4",
+      "guid": "538a4a0c-2ea0-44c6-8f8d-6a7433ff047c",
       "severity": "Medium",
       "link": "https://kubernetes.io/docs/setup/production-environment/windows/intro-windows-in-kubernetes/#supported-functionality-and-limitations"
     },
@@ -1686,7 +2001,7 @@
       "description": "AKS clusters with Windows node pools must use the Azure CNI (advanced) networking model. Kubenet (basic) networking is not supported. ",
       "subcategory": "windows",
       "category": "Windows",
-      "guid": "2470827e-4538-46cd-b9a8-d843d4c710f5",
+      "guid": "b9474033-230c-4149-b92f-d2943c9f3a31",
       "severity": "High",
       "link": "https://docs.microsoft.com/en-us/azure/aks/windows-node-limitations#what-network-plug-ins-are-supported"
     },
@@ -1695,7 +2010,7 @@
       "description": "Windows Server nodes in AKS must be upgraded to get the latest patch fixes and updates. Windows Updates are not enabled on nodes in AKS. AKS releases new node pool images as soon as patches are available, it is the customers responsibility to upgrade node pools to stay current on patches and hotfix. ",
       "subcategory": "windows",
       "category": "Windows",
-      "guid": "b0f429ce-c545-44f1-a0bd-4f0e4b009783",
+      "guid": "dd10316d-9eaf-4b4c-9833-93df33b370fe",
       "severity": "High",
       "link": "https://docs.microsoft.com/en-us/azure/aks/windows-node-limitations#how-do-patch-my-windows-nodes"
     },
@@ -1704,7 +2019,7 @@
       "description": "Network policies are currently not supported, ensure that the containerized applications have a layer of protection like authentication ",
       "subcategory": "windows",
       "category": "Windows",
-      "guid": "9b8433a5-f039-4347-a2b1-e030f65cad4c",
+      "guid": "9ad34019-4668-4c17-b909-65db30d7f430",
       "severity": "High",
       "link": "https://kubernetes.io/docs/setup/production-environment/windows/intro-windows-in-kubernetes/#supported-functionality-and-limitations"
     },
@@ -1713,7 +2028,7 @@
       "description": "Group Managed Service Accounts (GMSA) is a managed domain account for multiple servers that provides automatic password management, simplified service principal name (SPN) management and the ability to delegate the management to other administrators.",
       "subcategory": "windows",
       "category": "Windows",
-      "guid": "03e8a8bc-bd60-4cb8-9595-92919015caed",
+      "guid": "cfa05a43-2aa7-44a9-bb0d-64e666f79240",
       "severity": "Medium",
       "link": "https://docs.microsoft.com/en-gb/azure/aks/use-group-managed-service-accounts"
     }
